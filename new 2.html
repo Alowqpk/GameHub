@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Share</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #1e90ff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .game-card {
+            background-color: #ffffff;
+            color: #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .game-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .game-card h3 {
+            margin: 0;
+            padding: 1rem;
+            font-size: 1.8rem;
+            background-color: #1e90ff;
+            color: #ffffff;
+        }
+
+        .game-card p {
+            padding: 1rem;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e90ff;
+            color: #ffffff;
+            margin-top: 2rem;
+        }
+
+        .add-game {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .add-game button {
+            background-color: #ff4500;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .add-game button:hover {
+            background-color: #ff6347;
+        }
+
+        .game-form {
+            display: none;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        .game-form input, .game-form textarea {
+            width: calc(100% - 2rem);
+            margin: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .game-form button {
+            display: block;
+            margin: 0 auto;
+            background-color: #1e90ff;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .game-form button:hover {
+            background-color: #4682b4;
+        }
+    </style>
+    <script>
+        function toggleForm() {
+            const form = document.querySelector('.game-form');
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function addGame(event) {
+            event.preventDefault();
+
+            const title = document.querySelector('#game-title').value;
+            const description = document.querySelector('#game-description').value;
+            const image = document.querySelector('#game-image').value;
+
+            const container = document.querySelector('.container');
+            const card = document.createElement('div');
+            card.className = 'game-card';
+
+            const imgElement = document.createElement('img');
+            imgElement.src = image;
+            card.appendChild(imgElement);
+
+            const titleElement = document.createElement('h3');
+            titleElement.textContent = title;
+            card.appendChild(titleElement);
+
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = description;
+            card.appendChild(descriptionElement);
+
+            container.appendChild(card);
+
+            document.querySelector('#game-title').value = '';
+            document.querySelector('#game-description').value = '';
+            document.querySelector('#game-image').value = '';
+            toggleForm();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Game Share</h1>
+    </header>
+
+    <div class="add-game">
+        <button onclick="toggleForm()">Add a Game</button>
+        <form class="game-form" onsubmit="addGame(event)">
+            <input type="text" id="game-title" placeholder="Game Title" required>
+            <textarea id="game-description" placeholder="Game Description" required></textarea>
+            <input type="url" id="game-image" placeholder="Image URL" required>
+            <button type="submit">Share Game</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <!-- Games will be dynamically added here -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Game Share | All rights reserved.</p>
+    </footer>
+</body>
+</html>
